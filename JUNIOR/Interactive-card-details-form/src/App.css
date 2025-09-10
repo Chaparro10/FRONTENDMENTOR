@@ -1,0 +1,75 @@
+:root{
+  /* Ajusta estos valores a tu diseño */
+  --sidebar-w: clamp(280px, 34vw, 520px);
+  --card-w: clamp(260px, 28vw, 380px);
+  --gap: clamp(16px, 3vw, 40px);
+}
+
+* { box-sizing: border-box; }
+
+.app{
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  min-height: 100svh; /* mejor que 100vh en móviles */
+  background: #ffffff;
+}
+
+/* Sidebar con imagen de fondo */
+.sidebar{
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* Contenedor para posicionar las tarjetas */
+.cards{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Cada tarjeta como capa posicionada */
+.card{
+  position: absolute;
+  width: var(--card-w);
+  /* Si tus componentes Card ya tienen tamaño, puedes quitar el width */
+}
+
+/* Posiciones (ajusta porcentajes/offsets para calcar tu mock) */
+.card-front{
+  top: 12vh;
+  left: 10%;
+}
+
+.card-back{
+  bottom: 350px;
+  left: 80%;
+}
+
+/* Área del contenido (formulario) */
+.content{
+  display: grid;
+  place-items: center;      /* centra el FormCard */
+  padding: var(--gap);
+  width: 100vw;
+}
+
+/* Responsive: apila */
+@media (max-width: 900px){
+  .app{
+    grid-template-columns: 1fr;
+  }
+  .sidebar{
+    min-height: 260px; /* altura para que se vean las tarjetas */
+  }
+  .content{
+    padding-block: calc(var(--gap) * 2);
+  }
+  /* Reposiciona un poco en móvil */
+  .card{
+    width: clamp(240px, 70vw, 360px);
+  }
+  .card-front{ top: 40px; left: 16px; }
+  .card-back{ bottom: -20px; left: 56px; }
+}
